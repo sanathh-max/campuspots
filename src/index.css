@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400 dark:bg-slate-600;
+}
+
+/* Leaflet UI adjustments & Dark mode map tiles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  font-family: 'Inter', sans-serif !important;
+  background-color: #f8fafc !important;
+}
+
+.dark .leaflet-container {
+  background-color: #0f172a !important;
+}
+
+/* Dark mode map tiles filter for OpenStreetMap */
+.dark .leaflet-tile-pane {
+  filter: brightness(0.75) invert(1) contrast(1.2) hue-rotate(200deg) saturate(0.4);
+}
+
+.leaflet-popup-content-wrapper {
+  @apply bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl shadow-xl border border-slate-100 dark:border-slate-700 p-0 overflow-hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip {
+  @apply bg-white dark:bg-slate-800;
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+  @apply bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-b border-slate-100 dark:border-slate-700 !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  font-size: 16px !important;
+  transition: all 0.2s ease;
+}
+
+.leaflet-control-zoom a:hover {
+  @apply bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white !important;
+}
+
+/* Marker clustering custom styling */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  @apply bg-sky-500/30 dark:bg-sky-400/30 backdrop-blur-sm border-2 border-sky-600 dark:border-sky-400 text-sky-900 dark:text-sky-100 font-bold rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110;
+}
+
+.marker-cluster div {
+  @apply bg-sky-600 dark:bg-sky-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-inner;
+}
+
+/* Custom Marker Pins */
+.custom-pin-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.custom-pin-marker:hover {
+  transform: scale(1.15) translateY(-4px);
+  z-index: 999 !important;
+}
+
+/* Polyline dash animation */
+.animated-polyline {
+  stroke-dasharray: 8, 8;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}

@@ -9,6 +9,50 @@
   }
 }
 
+/* ==========================================================================
+   Design System: Unified Button Hierarchy (Resolves Issue #1)
+   Limits distinct button styles to 5 cohesive variants across the app.
+   ========================================================================== */
+@layer components {
+  /* 1. Primary Action Button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold
+           bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white shadow-sm shadow-sky-500/20
+           transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  /* 2. Secondary / Neutral Surface Button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium
+           bg-slate-100 hover:bg-slate-200 active:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700
+           text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700
+           transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 disabled:opacity-50;
+  }
+
+  /* 3. Filter Chip Button */
+  .btn-chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border
+           transition-all focus:outline-none focus:ring-2 focus:ring-sky-500 shrink-0;
+  }
+
+  /* 4. Compact Icon Action Button */
+  .btn-icon {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-xl
+           text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-100
+           hover:bg-slate-100 dark:hover:bg-slate-800 active:scale-95
+           transition-all focus:outline-none focus:ring-2 focus:ring-sky-500;
+  }
+
+  /* 5. Floating Action Button (FAB) */
+  .btn-fab {
+    @apply inline-flex items-center justify-center w-14 h-14 rounded-full
+           bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700
+           text-white shadow-xl shadow-sky-500/30 transition-transform hover:scale-105 active:scale-95
+           focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2;
+  }
+}
+
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
@@ -78,27 +122,45 @@
   @apply bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white !important;
 }
 
-/* Marker clustering custom styling */
+/* ==========================================================================
+   Marker Clustering Styling (Standardized to 36px Circular - Resolves Issue #8)
+   ========================================================================== */
 .marker-cluster-small,
 .marker-cluster-medium,
-.marker-cluster-large {
-  @apply bg-sky-500/30 dark:bg-sky-400/30 backdrop-blur-sm border-2 border-sky-600 dark:border-sky-400 text-sky-900 dark:text-sky-100 font-bold rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110;
+.marker-cluster-large,
+.marker-cluster {
+  width: 36px !important;
+  height: 36px !important;
+  margin-left: -18px !important;
+  margin-top: -18px !important;
+  @apply bg-sky-500/25 dark:bg-sky-400/25 backdrop-blur-sm border-2 border-sky-500 dark:border-sky-400
+         text-sky-900 dark:text-sky-100 font-bold rounded-full flex items-center justify-center
+         shadow-md transition-transform hover:scale-110;
 }
 
 .marker-cluster div {
-  @apply bg-sky-600 dark:bg-sky-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold shadow-inner;
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 !important;
+  line-height: 28px !important;
+  @apply bg-sky-600 dark:bg-sky-500 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow-inner;
 }
 
-/* Custom Marker Pins */
+/* ==========================================================================
+   Custom Marker Pins (Resolves Issues #6, #7, #8)
+   Translucent backdrop, circular 36px geometry, soft elevation shadow
+   ========================================================================== */
 .custom-pin-marker {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
   transition: transform 0.2s ease-in-out;
 }
 
 .custom-pin-marker:hover {
-  transform: scale(1.15) translateY(-4px);
+  transform: scale(1.15) translateY(-2px);
   z-index: 999 !important;
 }
 

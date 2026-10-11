@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapPin, Search, Loader2, X } from 'lucide-react';
+import { MapPin, Loader2, X } from 'lucide-react';
 
 export function PlaceSearch({ onSelectPlace }) {
   const [query, setQuery] = useState('');
@@ -62,21 +62,28 @@ export function PlaceSearch({ onSelectPlace }) {
 
   return (
     <div ref={dropdownRef} className="relative w-full sm:w-72">
+      {/* Distinct Location Input (Resolves Issue #5 by distinguishing Location vs Spot search) */}
       <div className="relative">
-        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+        <label htmlFor="city-geocoding-input" className="sr-only">
+          Jump to Indian City or College
+        </label>
+        <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true" />
         <input
+          id="city-geocoding-input"
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search Indian city or college..."
-          className="w-full pl-8 pr-8 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 placeholder-slate-400 rounded-xl border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-900 transition"
+          placeholder="Jump to city or campus..."
+          aria-label="Jump to city or campus location"
+          className="w-full pl-8 pr-8 py-2 text-xs bg-sky-50/60 dark:bg-slate-800/80 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-xl border border-sky-200 dark:border-slate-700 focus:ring-2 focus:ring-sky-500 focus:bg-white dark:focus:bg-slate-900 transition"
         />
         {isLoading ? (
-          <Loader2 className="w-3.5 h-3.5 text-sky-500 animate-spin absolute right-2.5 top-1/2 -translate-y-1/2" />
+          <Loader2 className="w-3.5 h-3.5 text-sky-500 animate-spin absolute right-2.5 top-1/2 -translate-y-1/2" aria-hidden="true" />
         ) : query ? (
           <button
             onClick={() => setQuery('')}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+            aria-label="Clear location query"
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 rounded-md"
           >
             <X className="w-3 h-3" />
           </button>
@@ -92,12 +99,12 @@ export function PlaceSearch({ onSelectPlace }) {
               onClick={() => handleSelect(item)}
               className="w-full text-left p-2.5 hover:bg-sky-50 dark:hover:bg-slate-800 transition flex items-start gap-2 text-xs"
             >
-              <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
+              <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" aria-hidden="true" />
               <div className="min-w-0">
                 <p className="font-semibold text-slate-900 dark:text-white truncate">
                   {item.name || item.display_name.split(',')[0]}
                 </p>
-                <p className="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">
                   {item.display_name}
                 </p>
               </div>

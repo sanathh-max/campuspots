@@ -254,17 +254,14 @@ export function App() {
           mapTargetZoom={mapTargetZoom}
         />
 
-        {/* Floating Add Pin (+) Button */}
+        {/* Floating Add Pin (+) Button (Resolves Issue #1: Standardized btn-fab) */}
         <button
           onClick={handleOpenAddModal}
-          className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white p-4 rounded-full shadow-2xl shadow-sky-500/40 flex items-center justify-center transition transform hover:scale-110 active:scale-95 group focus:outline-none"
+          className="fixed bottom-6 right-6 z-40 btn-fab group"
           title="Add a Spot in India"
           aria-label="Add a Spot in India"
         >
-          <Plus className="w-7 h-7 stroke-[2.5]" />
-          <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:ml-2 text-xs font-extrabold transition-all duration-300">
-            Pin New Spot
-          </span>
+          <Plus className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
         </button>
       </main>
 
